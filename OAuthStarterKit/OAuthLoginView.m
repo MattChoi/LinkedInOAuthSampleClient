@@ -33,8 +33,8 @@
 //
 - (void)requestTokenFromProvider
 {
-    OAMutableURLRequest *request = 
-            [[[OAMutableURLRequest alloc] initWithURL:requestTokenURL
+    LinkedInOAMutableURLRequest *request =
+            [[[LinkedInOAMutableURLRequest alloc] initWithURL:requestTokenURL
                                              consumer:self.consumer
                                                 token:nil   
                                              callback:linkedInCallbackURL
@@ -42,11 +42,11 @@
     
     [request setHTTPMethod:@"POST"];   
     
-    OARequestParameter *nameParam = [[OARequestParameter alloc] initWithName:@"scope"
+    LinkInOARequestParameter *nameParam = [[LinkInOARequestParameter alloc] initWithName:@"scope"
                                                                        value:@"r_basicprofile+rw_nus"];
     NSArray *params = [NSArray arrayWithObjects:nameParam, nil];
     [request setParameters:params];
-    OARequestParameter * scopeParameter=[OARequestParameter requestParameter:@"scope" value:@"r_fullprofile rw_nus"];
+    LinkInOARequestParameter * scopeParameter=[LinkInOARequestParameter requestParameter:@"scope" value:@"r_fullprofile rw_nus"];
     
     [request setParameters:[NSArray arrayWithObject:scopeParameter]];
     
@@ -176,8 +176,8 @@
 //
 - (void)accessTokenFromProvider
 { 
-    OAMutableURLRequest *request = 
-            [[[OAMutableURLRequest alloc] initWithURL:accessTokenURL
+    LinkedInOAMutableURLRequest *request = 
+            [[[LinkedInOAMutableURLRequest alloc] initWithURL:accessTokenURL
                                              consumer:self.consumer
                                                 token:self.requestToken   
                                              callback:nil

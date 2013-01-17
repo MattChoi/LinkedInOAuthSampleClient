@@ -25,22 +25,23 @@
 
 
 #import <Foundation/Foundation.h>
-#import "OAMutableURLRequest.h"
+#import "LinkedInOAMutableURLRequest.h"
 
-
+@class OAMutableURLRequest;
 @interface OAServiceTicket : NSObject {
 @private
-    OAMutableURLRequest *request;
+//    OAMutableURLRequest *request;
+    LinkedInOAMutableURLRequest *linkInRequest;
     NSURLResponse *response;
 	NSData *data;
     BOOL didSucceed;
 }
-@property(readonly) OAMutableURLRequest *request;
+@property(readonly) LinkedInOAMutableURLRequest *linkInRequest;
 @property(readonly) NSURLResponse *response;
 @property(readonly) NSData *data;
 @property(readonly) BOOL didSucceed;
 @property(readonly) NSString *body;
 
-- (id)initWithRequest:(OAMutableURLRequest *)aRequest response:(NSURLResponse *)aResponse data:(NSData *)aData didSucceed:(BOOL)success;
+- (id)initWithRequest:(LinkedInOAMutableURLRequest *)aRequest response:(NSURLResponse *)aResponse data:(NSData *)aData didSucceed:(BOOL)success;
 
 @end

@@ -46,8 +46,8 @@
 - (void)profileApiCall
 {
     NSURL *url = [NSURL URLWithString:@"http://api.linkedin.com/v1/people/~"];
-    OAMutableURLRequest *request = 
-    [[OAMutableURLRequest alloc] initWithURL:url
+    LinkedInOAMutableURLRequest *request = 
+    [[LinkedInOAMutableURLRequest alloc] initWithURL:url
                                     consumer:oAuthLoginView.consumer
                                        token:oAuthLoginView.accessToken
                                     callback:nil
@@ -92,8 +92,8 @@
 - (void)networkApiCall
 {
     NSURL *url = [NSURL URLWithString:@"http://api.linkedin.com/v1/people/~/network/updates?scope=self&count=1&type=STAT"];
-    OAMutableURLRequest *request = 
-    [[OAMutableURLRequest alloc] initWithURL:url
+    LinkedInOAMutableURLRequest *request = 
+    [[LinkedInOAMutableURLRequest alloc] initWithURL:url
                                     consumer:oAuthLoginView.consumer
                                        token:oAuthLoginView.accessToken
                                     callback:nil
@@ -154,8 +154,8 @@
 {    
     [statusTextView resignFirstResponder];
     NSURL *url = [NSURL URLWithString:@"http://api.linkedin.com/v1/people/~/shares"];
-    OAMutableURLRequest *request = 
-    [[OAMutableURLRequest alloc] initWithURL:url
+    LinkedInOAMutableURLRequest *request = 
+    [[LinkedInOAMutableURLRequest alloc] initWithURL:url
                                     consumer:oAuthLoginView.consumer
                                        token:oAuthLoginView.accessToken
                                     callback:nil

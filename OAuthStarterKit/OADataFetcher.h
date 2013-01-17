@@ -24,13 +24,13 @@
 //  THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "OAMutableURLRequest.h"
+#import "LinkedInOAMutableURLRequest.h"
 #import "OAServiceTicket.h"
 
 
 @interface OADataFetcher : NSObject {
 @private
-    OAMutableURLRequest *request;
+    LinkedInOAMutableURLRequest *request;
     NSURLResponse *response;
     NSURLConnection *connection;
     NSMutableData *responseData;
@@ -39,6 +39,6 @@
     SEL didFailSelector;
 }
 
-- (void)fetchDataWithRequest:(OAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector;
+- (void)fetchDataWithRequest:(LinkedInOAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector;
 
 @end

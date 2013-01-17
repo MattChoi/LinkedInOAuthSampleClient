@@ -1,5 +1,5 @@
 //
-//  OARequestParameter.m
+//  LinkInOARequestParameter.h
 //  OAuthConsumer
 //
 //  Created by Jon Crosby on 10/19/07.
@@ -24,49 +24,25 @@
 //  THE SOFTWARE.
 
 
-#import "OARequestParameter.h"
+#import <Foundation/Foundation.h>
+#import "NSString+URLEncoding.h"
 
 
-@implementation OARequestParameter
-@synthesize name, value;
-
-- (id)initWithName:(NSString *)aName value:(NSString *)aValue {
-    [super init];
-    self.name = aName;
-    self.value = aValue;
-    return self;
+@interface LinkInOARequestParameter : NSObject {
+@protected
+    NSString *name;
+    NSString *value;
 }
+@property(copy, readwrite) NSString *name;
+@property(copy, readwrite) NSString *value;
 
-- (NSString *)URLEncodedName {
-	return self.name;
-//    return [self.name encodedURLParameterString];
-}
+- (id)initWithName:(NSString *)aName value:(NSString *)aValue;
+- (NSString *)URLEncodedName;
+- (NSString *)URLEncodedValue;
+- (NSString *)URLEncodedNameValuePair;
 
-- (NSString *)URLEncodedValue {
-    return [self.value encodedURLParameterString];
-}
+- (BOOL)isEqualToRequestParameter:(LinkInOARequestParameter *)parameter;
 
-- (NSString *)URLEncodedNameValuePair {
-    return [NSString stringWithFormat:@"%@=%@", [self URLEncodedName], [self URLEncodedValue]];
-}
-
-- (BOOL)isEqual:(id)object {
-	if ([object isKindOfClass:[self class]]) {
-		return [self isEqualToRequestParameter:(OARequestParameter *)object];
-	}
-	
-	return NO;
-}
-
-- (BOOL)isEqualToRequestParameter:(OARequestParameter *)parameter {
-	return ([self.name isEqualToString:parameter.name] &&
-			[self.value isEqualToString:parameter.value]);
-}
-
-
-+ (id)requestParameter:(NSString *)aName value:(NSString *)aValue
-{
-	return [[[self alloc] initWithName:aName value:aValue] autorelease];
-}
++ (id)requestParameter:(NSString *)aName value:(NSString *)aValue;
 
 @end

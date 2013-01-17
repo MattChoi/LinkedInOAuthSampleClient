@@ -28,11 +28,17 @@
 
 
 @implementation OAServiceTicket
-@synthesize request, response, data, didSucceed;
+@synthesize linkInRequest, response, data, didSucceed;
 
-- (id)initWithRequest:(OAMutableURLRequest *)aRequest response:(NSURLResponse *)aResponse data:(NSData *)aData didSucceed:(BOOL)success {
+- (id)initWithRequest:(OAMutableURLRequest *)aRequest response:(NSHTTPURLResponse *)aResponse didSucceed:(BOOL)success
+{
+	return [self initWithRequest:aRequest response:aResponse data:nil didSucceed:success];
+}
+
+
+- (id)initWithRequest:(LinkedInOAMutableURLRequest *)aRequest response:(NSURLResponse *)aResponse data:(NSData *)aData didSucceed:(BOOL)success {
     [super init];
-    request = aRequest;
+    linkInRequest = aRequest;
     response = aResponse;
 	data = aData;
     didSucceed = success;

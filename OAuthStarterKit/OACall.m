@@ -11,7 +11,7 @@
 #import "OAProblem.h"
 #import "OADataFetcher.h"
 #import "OAServiceTicket.h"
-#import "OAMutableURLRequest.h"
+#import "LinkedInOAMutableURLRequest.h"
 #import "OACall.h"
 
 @interface OACall (Private)
@@ -125,7 +125,7 @@
 	delegate = aDelegate;
 	finishedSelector = finished;
 
-	request = [[OAMutableURLRequest alloc] initWithURL:url
+	request = [[LinkedInOAMutableURLRequest alloc] initWithURL:url
 											  consumer:consumer
 												token:token
                                               callback:nil

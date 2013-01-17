@@ -23,7 +23,7 @@
 //  THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-#import "OARequestParameter.h"
+#import "LinkInOARequestParameter.h"
 #import "NSURL+Base.h"
 
 

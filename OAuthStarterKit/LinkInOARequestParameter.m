@@ -1,5 +1,5 @@
 //
-//  OAMutableURLRequest.h
+//  LinkInOARequestParameter.m
 //  OAuthConsumer
 //
 //  Created by Jon Crosby on 10/19/07.
@@ -24,43 +24,49 @@
 //  THE SOFTWARE.
 
 
-#import <Foundation/Foundation.h>
-#import "OAConsumer.h"
-#import "OAToken.h"
-#import "OAHMAC_SHA1SignatureProvider.h"
-#import "OASignatureProviding.h"
-#import "NSMutableURLRequest+Parameters.h"
-#import "NSURL+Base.h"
+#import "LinkInOARequestParameter.h"
 
 
-@interface OAMutableURLRequest : NSMutableURLRequest {
-@protected
-    OAConsumer *consumer;
-    OAToken *token;
-    NSString *signature;
-    NSString *callback;
-    id<OASignatureProviding> signatureProvider;
-    NSString *nonce;
-    NSString *timestamp;
+@implementation LinkInOARequestParameter
+@synthesize name, value;
+
+- (id)initWithName:(NSString *)aName value:(NSString *)aValue {
+    [super init];
+    self.name = aName;
+    self.value = aValue;
+    return self;
 }
-@property(readonly) NSString *signature;
-@property(readonly) NSString *nonce;
+
+- (NSString *)URLEncodedName {
+	return self.name;
+//    return [self.name encodedURLParameterString];
+}
+
+- (NSString *)URLEncodedValue {
+    return [self.value encodedURLParameterString];
+}
+
+- (NSString *)URLEncodedNameValuePair {
+    return [NSString stringWithFormat:@"%@=%@", [self URLEncodedName], [self URLEncodedValue]];
+}
+
+- (BOOL)isEqual:(id)object {
+	if ([object isKindOfClass:[self class]]) {
+		return [self isEqualToRequestParameter:(LinkInOARequestParameter *)object];
+	}
+	
+	return NO;
+}
+
+- (BOOL)isEqualToRequestParameter:(LinkInOARequestParameter *)parameter {
+	return ([self.name isEqualToString:parameter.name] &&
+			[self.value isEqualToString:parameter.value]);
+}
 
 
-- (id)initWithURL:(NSURL *)aUrl
-		 consumer:(OAConsumer *)aConsumer
-			token:(OAToken *)aToken
-         callback:(NSString *)aCallback
-signatureProvider:(id<OASignatureProviding, NSObject>)aProvider;
-
- 
-- (id)initWithURL:(NSURL *)aUrl
-		 consumer:(OAConsumer *)aConsumer
-			token:(OAToken *)aToken
-signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
-            nonce:(NSString *)aNonce
-        timestamp:(NSString *)aTimestamp;
-
-- (void)prepare;
++ (id)requestParameter:(NSString *)aName value:(NSString *)aValue
+{
+	return [[[self alloc] initWithName:aName value:aValue] autorelease];
+}
 
 @end

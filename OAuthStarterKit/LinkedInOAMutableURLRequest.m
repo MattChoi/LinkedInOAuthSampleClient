@@ -1,5 +1,5 @@
 //
-//  OAMutableURLRequest.m
+//  LinkedInOAMutableURLRequest.m
 //  OAuthConsumer
 //
 //  Created by Jon Crosby on 10/19/07.
@@ -24,16 +24,16 @@
 //  THE SOFTWARE.
 
 
-#import "OAMutableURLRequest.h"
+#import "LinkedInOAMutableURLRequest.h"
 
 
-@interface OAMutableURLRequest (Private)
+@interface LinkedInOAMutableURLRequest (Private)
 - (void)_generateTimestamp;
 - (void)_generateNonce;
 - (NSString *)_signatureBaseString;
 @end
 
-@implementation OAMutableURLRequest
+@implementation LinkedInOAMutableURLRequest
 @synthesize signature, nonce;
 
 #pragma mark init
@@ -161,37 +161,37 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
 	NSArray *parameters = [self parameters];
 	NSMutableArray *parameterPairs = [[NSMutableArray alloc] initWithCapacity:(5 + [parameters count] + [tokenParameters count])];
     
-	OARequestParameter *parameter;
-	parameter = [[OARequestParameter alloc] initWithName:@"oauth_consumer_key" value:consumer.key];
+	LinkInOARequestParameter *parameter;
+	parameter = [[LinkInOARequestParameter alloc] initWithName:@"oauth_consumer_key" value:consumer.key];
 	
     [parameterPairs addObject:[parameter URLEncodedNameValuePair]];
 	[parameter release];
-	parameter = [[OARequestParameter alloc] initWithName:@"oauth_signature_method" value:[signatureProvider name]];
+	parameter = [[LinkInOARequestParameter alloc] initWithName:@"oauth_signature_method" value:[signatureProvider name]];
     [parameterPairs addObject:[parameter URLEncodedNameValuePair]];
 	[parameter release];
-	parameter = [[OARequestParameter alloc] initWithName:@"oauth_timestamp" value:timestamp];
+	parameter = [[LinkInOARequestParameter alloc] initWithName:@"oauth_timestamp" value:timestamp];
     [parameterPairs addObject:[parameter URLEncodedNameValuePair]];
 	[parameter release];
-	parameter = [[OARequestParameter alloc] initWithName:@"oauth_nonce" value:nonce];
+	parameter = [[LinkInOARequestParameter alloc] initWithName:@"oauth_nonce" value:nonce];
     [parameterPairs addObject:[parameter URLEncodedNameValuePair]];
 	[parameter release];
-	parameter = [[OARequestParameter alloc] initWithName:@"oauth_version" value:@"1.0"] ;
+	parameter = [[LinkInOARequestParameter alloc] initWithName:@"oauth_version" value:@"1.0"] ;
     [parameterPairs addObject:[parameter URLEncodedNameValuePair]];
 	[parameter release];
     
     if ([callback length] > 0)
     {
-        parameter = [[OARequestParameter alloc] initWithName:@"oauth_callback" value:callback] ;
+        parameter = [[LinkInOARequestParameter alloc] initWithName:@"oauth_callback" value:callback] ;
         [parameterPairs addObject:[parameter URLEncodedNameValuePair]];
         [parameter release];
     }
 	
 	for(NSString *k in tokenParameters) {
-		[parameterPairs addObject:[[OARequestParameter requestParameter:k value:[tokenParameters objectForKey:k]] URLEncodedNameValuePair]];
+		[parameterPairs addObject:[[LinkInOARequestParameter requestParameter:k value:[tokenParameters objectForKey:k]] URLEncodedNameValuePair]];
 	}
     
 	if (![[self valueForHTTPHeaderField:@"Content-Type"] hasPrefix:@"multipart/form-data"]) {
-		for (OARequestParameter *param in parameters) {
+		for (LinkInOARequestParameter *param in parameters) {
 			[parameterPairs addObject:[param URLEncodedNameValuePair]];
 		}
 	}

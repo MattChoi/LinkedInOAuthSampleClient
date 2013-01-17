@@ -11,7 +11,7 @@
 #import "OAuthLoginView.h"
 #import "JSONKit.h"
 #import "OAConsumer.h"
-#import "OAMutableURLRequest.h"
+#import "LinkedInOAMutableURLRequest.h"
 #import "OADataFetcher.h"
 #import "OATokenManager.h"
 

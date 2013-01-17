@@ -1,5 +1,5 @@
 //
-//  OARequestParameter.h
+//  LinkedInOAMutableURLRequest.h
 //  OAuthConsumer
 //
 //  Created by Jon Crosby on 10/19/07.
@@ -25,24 +25,42 @@
 
 
 #import <Foundation/Foundation.h>
-#import "NSString+URLEncoding.h"
+#import "OAConsumer.h"
+#import "OAToken.h"
+#import "OAHMAC_SHA1SignatureProvider.h"
+#import "OASignatureProviding.h"
+#import "NSMutableURLRequest+Parameters.h"
+#import "NSURL+Base.h"
 
 
-@interface OARequestParameter : NSObject {
+@interface LinkedInOAMutableURLRequest : NSMutableURLRequest {
 @protected
-    NSString *name;
-    NSString *value;
+    OAConsumer *consumer;
+    OAToken *token;
+    NSString *signature;
+    NSString *callback;
+    id<OASignatureProviding> signatureProvider;
+    NSString *nonce;
+    NSString *timestamp;
 }
-@property(copy, readwrite) NSString *name;
-@property(copy, readwrite) NSString *value;
+@property(readonly) NSString *signature;
+@property(readonly) NSString *nonce;
 
-- (id)initWithName:(NSString *)aName value:(NSString *)aValue;
-- (NSString *)URLEncodedName;
-- (NSString *)URLEncodedValue;
-- (NSString *)URLEncodedNameValuePair;
 
-- (BOOL)isEqualToRequestParameter:(OARequestParameter *)parameter;
+- (id)initWithURL:(NSURL *)aUrl
+		 consumer:(OAConsumer *)aConsumer
+			token:(OAToken *)aToken
+         callback:(NSString *)aCallback
+signatureProvider:(id<OASignatureProviding, NSObject>)aProvider;
 
-+ (id)requestParameter:(NSString *)aName value:(NSString *)aValue;
+ 
+- (id)initWithURL:(NSURL *)aUrl
+		 consumer:(OAConsumer *)aConsumer
+			token:(OAToken *)aToken
+signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
+            nonce:(NSString *)aNonce
+        timestamp:(NSString *)aTimestamp;
+
+- (void)prepare;
 
 @end

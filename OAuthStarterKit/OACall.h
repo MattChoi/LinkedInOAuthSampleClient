@@ -21,7 +21,7 @@
 @class OAConsumer;
 @class OAToken;
 @class OADataFetcher;
-@class OAMutableURLRequest;
+@class LinkedInOAMutableURLRequest;
 @class OAServiceTicket;
 
 @interface OACall : NSObject {
@@ -32,7 +32,7 @@
 	NSObject <OACallDelegate> *delegate;
 	SEL finishedSelector;
 	OADataFetcher *fetcher;
-	OAMutableURLRequest *request;
+	LinkedInOAMutableURLRequest *request;
 	OAServiceTicket *ticket;
 }
 

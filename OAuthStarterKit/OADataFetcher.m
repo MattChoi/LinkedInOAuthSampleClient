@@ -74,7 +74,7 @@
 	[ticket release];
 }
 
-- (void)fetchDataWithRequest:(OAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector 
+- (void)fetchDataWithRequest:(LinkedInOAMutableURLRequest *)aRequest delegate:(id)aDelegate didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector 
 {
 	[request release];
 	request = [aRequest retain];
